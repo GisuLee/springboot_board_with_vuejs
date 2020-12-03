@@ -11,13 +11,13 @@
             {{getPostList}}
             <tr>
                 <th class="text-center">
-                    번호ss
+                    번호
                 </th>
                 <th class="text-center">
                     제목
                 </th>
                 <th class="text-center">
-                    작성자s
+                    작성자
                 </th>
                 <th class="text-center">
                     날짜
@@ -25,7 +25,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="item in desserts" :key="item.name">
+            <tr v-for="item in getPostList" :key="item.title">
                 <td>{{ item.calories }}</td>
                 <td>{{ item.name }}</td>
 
@@ -54,8 +54,8 @@ export default {
     },
     methods: {
         queryGetPostList() {
-			console.log("queryGetPostList")
-            this.$store.dispatch('QUERY_GET_POSTLIST');
+			console.log("queryGetPostLdssist")
+            console.log(this.$store.dispatch('QUERY_GET_POSTLIST');
         }
     }
 };

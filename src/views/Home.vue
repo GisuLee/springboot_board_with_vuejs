@@ -1,12 +1,13 @@
 /* ## BoardList.vue 내용 */
 <template>
 <v-container>
-    <v-data-table :headers="headers" :items="posts" :items-per-page="5" class="elevation-1" >
+    <v-data-table :headers="headers" :items="getPostList" :items-per-page="5" class="elevation-1" >
     </v-data-table>
 
 	{{getPostList}}
     <v-col class="text-right">
         <v-btn color="primary" @click="queryGetPostList" >게시글 작성</v-btn>
+        <v-btn color="primary" @click="dd" >ㄴㄴㄴ 작성</v-btn>
     </v-col>
 </v-container>
 </template>
@@ -35,32 +36,24 @@ export default {
                 value: 'modifiedDate',
                 sortable: false,
             }],
-            posts: [{
-                    id: 1,
-                    title: 'abc',
-                    author: '이기수',
-                    modifiedDate: '2012-12-12'
-                },
-                {
-                    id: 2,
-                    title: 'abc',
-                    author: '이기수',
-                    modifiedDate: '2012-12-12'
-                }
-            ],
+            posts: this.$store.state.postsList
+
         }
     },
     computed: {
         getPostList() {
             console.log("getPostList")
-            console.log(this.$store.getters.getPostList);
-            return this.$store.getters.getPostList;
+            console.log(this.$store.getters.GET_POST_LIST);
+            return this.$store.getters.GET_POST_LIST;
         },
     },
     methods: {
         queryGetPostList() {
             console.log("queryGetPostList")
 			this.$store.dispatch('QUERY_POST_LIST');
+        },
+        dd(){
+            console.log(this.$store.getters.GET_POST_LIST);
         }
     }
 };

@@ -30,6 +30,7 @@ const mutations = {
 
   SET_POST_LIST(state, postList) {
     state.postList = postList;
+    console.log("SET_POST_LIST" + state.postList)
   },
 };
 
@@ -47,6 +48,7 @@ const actions = {
     try {
       const response = await updatePostsList();
       context.commit("SET_POST_LIST", response.data);
+      console.log(response.data)
       return response.data;
     } catch (e) {
       return Promise.reject(e);
