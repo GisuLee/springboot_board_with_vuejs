@@ -1,4 +1,6 @@
-import { updatePostsList, readPostByPostId } from "../api/post_api";
+import { updatePostsList, readPostByPostId, writePost } from "../api/post_api";
+import router from "../router";
+
 // state
 const state = {
   post: {
@@ -6,6 +8,12 @@ const state = {
     content: "빈 내용",
     author: "작성자",
     modifiedDate: "일자",
+    writer: {
+      id: "1",
+      name: "이기수",
+      picture: "picture",
+      role: "USER",
+    },
   },
 
   postList: [],
@@ -13,7 +21,7 @@ const state = {
 
 // getters
 const getters = {
-  getPost(state) {
+  GET_POST_DETAIL(state) {
     return state.post;
   },
 
@@ -24,36 +32,61 @@ const getters = {
 
 // mutations
 const mutations = {
-  setPost(state, post) {
-    state.post = post;
-  },
-
   SET_POST_LIST(state, postList) {
     state.postList = postList;
-    console.log("SET_POST_LIST" + state.postList)
+  },
+
+  SET_POST_DETAIL(state, post) {
+    state.post = post;
   },
 };
 
 // actions
 const actions = {
-  QUERY_READ_POST({ state, commit }, { post }) {
-    commit("setPost", post);
-  },
-  QUERY_READ_POST2({ state, commit }, postId) {
-    post = readPostByPostId(postId);
-    commit("setPost", post);
+  async QUERY_POST_DETAIL(context, id) {
+    try {
+      const response = await readPostByPostId(id);
+      context.commit("SET_POST_DETAIL", response.data);
+      console.log(response.data);
+
+      return response.data;
+    } catch (e) {
+      return Promise.reject(e);
+    }
   },
 
   async QUERY_POST_LIST(context) {
     try {
       const response = await updatePostsList();
       context.commit("SET_POST_LIST", response.data);
-      console.log(response.data)
+      console.log(response.data);
+
+      return response.data;
+    } catch (e) {
+      return Promise.reject(e);
+    }
+  },
+
+  async QUERY_WRITE_POST(context, requestPostSaveDto) {
+    try {
+      const response = await writePost(requestPostSaveDto);
+      context.commit("SET_POST", response.data);
+      console.log(response);
+      if (requestPostSaveDto.onSuccessed != null) {
+        requestPostSaveDto.onSuccessed();
+      }
+
+      if (
+        requestPostSaveDto.redirectUrl != null &&
+        requestPostSaveDto.redirectUrl != ""
+      ) {
+        router.push(requestPostSaveDto.redirectUrl);
+      }
+
       return response.data;
     } catch (e) {
       return Promise.reject(e);
     } finally {
-      console.log('End');
     }
   },
 };

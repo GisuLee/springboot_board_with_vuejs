@@ -9,7 +9,7 @@ export async function readPostByPostId(postId){
 };
 
 export async function writePost(postSaveReqeustDto){
-	return http.post("/api/v1/posts/" + postSaveReqeustDto)
+	return http.post("/api/v1/posts/" , postSaveReqeustDto)
 };
 
 export async function modifyPost(postid, user, postUpdateRequestDto){

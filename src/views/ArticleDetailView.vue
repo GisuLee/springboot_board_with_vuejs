@@ -1,11 +1,11 @@
 <template>
   <div>
-    <h1 class="d-flex justify-center mt-3">{{ getPost.title }}</h1>
+    <h1 class="d-flex justify-center mt-3">{{ getPostDetail.title }}</h1>
     <p class="d-flex justify-center grey--text text--lighten-1">
-      {{ getPost.author }} / {{ getPost.modifiedDate }}
+      {{ getPostDetail.author }} / {{ getPostDetail.modifiedDate }}
     </p>
     <v-divider />
-    <div class="my-5">{{ getPost.content }}</div>
+    <div class="my-5">{{ getPostDetail.content }}</div>
     <v-divider />
 
     <div class="d-flex mt-6">
@@ -34,17 +34,20 @@ export default {
       id: this.$route.params.id,
     };
   },
+  created(){
+		this.$store.dispatch("QUERY_POST_DETAIL",this.id);
+  },
+
   computed: {
-    getPost() {
-      console.log(this.$store.getters.getPost);
-      return this.$store.getters.getPost;
+    getPostDetail() {
+      console.log(this.$store.getters.GET_POST_DETAIL);
+      return this.$store.getters.GET_POST_DETAIL;
     },
   },
   methods: {
     onChangedMsg() {
 		console.log('dd');
-	  this.$store.dispatch("QUERY_READ_POST2",1);
-	  this.$store.di
+	  
     },
   },
 };

@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import ArticleDetailView from '../views/ArticleDetailView.vue'
 import ArticleUpdateView from '../views/ArticleUpdateView.vue'
+import ArticleWriter from '../views/ArticleWriter.vue'
 
 Vue.use(VueRouter)
 
@@ -22,6 +23,11 @@ const routes = [
     name: 'ArticleUpdateView',
     component: ArticleUpdateView
   },
+  {
+	  path: '/save',
+	  name: 'ArticleWriterView',
+	  component: ArticleWriter
+  }
 ]
 
 const router = new VueRouter({
