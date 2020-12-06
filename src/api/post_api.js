@@ -12,8 +12,8 @@ export async function writePost(postSaveReqeustDto){
 	return http.post("/api/v1/posts/" , postSaveReqeustDto)
 };
 
-export async function modifyPost(postid, user, postUpdateRequestDto){
-	return http.put("/api/v1/posts/" + postid, user, postUpdateRequestDto)
+export async function updatePost(postid, postUpdateRequestDto){
+	return http.put("/api/v1/posts/" + postid, postUpdateRequestDto)
 };
 
 export async function deletePost(postId, user){

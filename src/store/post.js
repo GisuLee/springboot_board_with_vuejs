@@ -1,4 +1,4 @@
-import { updatePostsList, readPostByPostId, writePost } from "../api/post_api";
+import { updatePostsList, readPostByPostId, writePost, deletePost,updatePost } from "../api/post_api";
 import router from "../router";
 
 // state
@@ -8,12 +8,7 @@ const state = {
     content: "빈 내용",
     author: "작성자",
     modifiedDate: "일자",
-    writer: {
-      id: "1",
-      name: "이기수",
-      picture: "picture",
-      role: "USER",
-    },
+    userEmail: "",
   },
 
   postList: [],
@@ -51,6 +46,19 @@ const actions = {
 
       return response.data;
     } catch (e) {
+
+      return Promise.reject(e);
+    }
+  },
+
+  async QUERY_DELETE_POST(context,id) {
+    try {
+      const response = await deletePost(id);
+      alert('게시물을 삭제하였습니다');
+      router.push("/");
+      return response.data;
+    } catch (e) {
+      alert("권한이 없습니다");
       return Promise.reject(e);
     }
   },
@@ -59,8 +67,6 @@ const actions = {
     try {
       const response = await updatePostsList();
       context.commit("SET_POST_LIST", response.data);
-      console.log(response.data);
-
       return response.data;
     } catch (e) {
       return Promise.reject(e);
@@ -70,23 +76,24 @@ const actions = {
   async QUERY_WRITE_POST(context, requestPostSaveDto) {
     try {
       const response = await writePost(requestPostSaveDto);
-      context.commit("SET_POST", response.data);
-      console.log(response);
-      if (requestPostSaveDto.onSuccessed != null) {
-        requestPostSaveDto.onSuccessed();
-      }
+      router.push("/");
+      return response.data;
+    } catch (e) {
+      alert("권한이 없습니다");
+      return Promise.reject(e);
+    } finally {
+    }
+  },
 
-      if (
-        requestPostSaveDto.redirectUrl != null &&
-        requestPostSaveDto.redirectUrl != ""
-      ) {
-        router.push(requestPostSaveDto.redirectUrl);
-      }
-
+  async QUERY_UPDATE_POST(context, requestPostUpdateDto) {
+    try {
+      const response = await updatePost(requestPostUpdateDto.id, requestPostUpdateDto);
+      alert('게시물을 수정하였습니다.');
+      router.push("/");
       return response.data;
     } catch (e) {
       return Promise.reject(e);
-    } finally {
+      } finally {
     }
   },
 };

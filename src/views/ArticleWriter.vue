@@ -28,13 +28,7 @@ export default {
             var requestPostDto = {
                 title: title,
                 content: content,
-                author: "작성자",
-                writer: {
-                    id: "1",
-                    name: "이기수",
-                    picture: "picture",
-                    role: "USER"
-				},
+                author: this.$store.getters.GET_USER_NAME,
 				redirectUrl: "/",
 				onSuccessed: function(){
 						alert('글등록이 완료되었습니다.')
