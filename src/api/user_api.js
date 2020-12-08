@@ -5,7 +5,7 @@ export async function getSessionUser(){
 };
 
 export async function logout(){
-	return http.get("/api/v1/logout");
+	return http.post("/logout");
 };
 
 

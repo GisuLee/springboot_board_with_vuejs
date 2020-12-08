@@ -5,7 +5,9 @@
       {{ getPostDetail.author }} / {{ getPostDetail.modifiedDate }}
     </p>
     <v-divider />
-    <div class="my-5">{{ getPostDetail.content }}</div>
+    <div class="my-5">
+      <MarkdownView :markdownstring="getPostDetail.content"> </MarkdownView>
+    </div>
     <v-divider />
 
     <div class="d-flex mt-6">
@@ -28,7 +30,13 @@
 </template>
 
 <script>
+import MarkdownView from "../components/MarkdownView";
+import { eventBus } from "../main.js";
+
 export default {
+  components: {
+    MarkdownView,
+  },
   data() {
     return {
       id: this.$route.params.id,
@@ -40,6 +48,7 @@ export default {
 
   computed: {
     getPostDetail() {
+      eventBus.$emit("FETCH", this.$store.getters.GET_POST_DETAIL);
       return this.$store.getters.GET_POST_DETAIL;
     },
   },

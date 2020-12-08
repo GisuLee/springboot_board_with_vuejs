@@ -4,11 +4,7 @@ import router from "../router";
 // state
 const state = {
   post: {
-    title: "제목",
-    content: "빈 내용",
-    author: "작성자",
-    modifiedDate: "일자",
-    userEmail: "",
+
   },
 
   postList: [],
