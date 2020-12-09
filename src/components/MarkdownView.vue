@@ -89,7 +89,7 @@ export default {
             text +
             "</h" +
             level +
-            '><hr color="#CFD8DC" size="4" class="mt-3 mb-5">'
+            '><hr color="#CFD8DC" size="1" class="mt-1 mb-5">'
           );
         } else {
           return "<h" + level + ">" + text + "</h" + level + ">";
@@ -98,7 +98,7 @@ export default {
 
       // hr 태그 커스텀
       renderer.hr = function() {
-        return '<hr color="#ECEFF1" size="7">';
+        return '<hr color="#ECEFF1" size="4">';
       };
 
       // li 태그 커스텀

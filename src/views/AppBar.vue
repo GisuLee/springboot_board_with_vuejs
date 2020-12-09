@@ -29,7 +29,7 @@
         >
         <v-icon>mdi-login</v-icon>
       </v-btn>
-      <!-- <v-btn @click="login"> 테스트 </v-btn> -->
+      <v-btn @click="login"> 테스트 </v-btn>
     </div>
   </v-app-bar>
 </template>

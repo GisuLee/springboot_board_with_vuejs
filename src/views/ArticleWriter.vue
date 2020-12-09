@@ -5,7 +5,7 @@
             <v-text-field :counter="50" label="제목" name="title" required v-model="title" maxlength="50"></v-text-field>
         </v-row>
         <v-row>
-            <v-textarea filled name="context" hint="내용을 입력해주세요." v-model="content" :counter="1000" maxlength="1000"></v-textarea>
+            <v-textarea filled name="context" hint="내용을 입력해주세요." v-model="content" height="500px" ></v-textarea>
         </v-row>
         <v-row>
             <v-btn block color="primary" @click="onWriteClick">등록</v-btn>
